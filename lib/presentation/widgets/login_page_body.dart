@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_maps/presentation/widgets/login_intro_text.dart';
-import 'package:flutter_maps/presentation/widgets/next_button.dart';
 import 'package:flutter_maps/presentation/widgets/phone_form_field.dart';
 import 'package:gap/gap.dart';
 
@@ -19,8 +18,8 @@ class LoginPageBody extends StatelessWidget {
           const LoginIntroText(),
           const Gap(150),
           PhoneFormField(),
-          const Gap(70),
-          const NewxtButton(),
+          // const Gap(70),
+          // const NewxtButton(),
         ],
       ),
     );
