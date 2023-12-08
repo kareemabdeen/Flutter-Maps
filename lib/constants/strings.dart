@@ -8,3 +8,4 @@ const placeLocationBaseUrl =
 
 const directionsBaseUrl =
     'https://maps.googleapis.com/maps/api/directions/json';
+const loadingAnimationImage = 'lib/assets/loading_animation.json';

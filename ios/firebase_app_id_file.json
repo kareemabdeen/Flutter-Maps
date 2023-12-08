@@ -1,7 +1,7 @@
 {
   "file_generated_by": "FlutterFire CLI",
   "purpose": "FirebaseAppID & ProjectID for this Firebase app in this directory",
-  "GOOGLE_APP_ID": "1:724745692589:ios:547c3aa5e379a81d8bad24",
-  "FIREBASE_PROJECT_ID": "flutter-maps-c9649",
-  "GCM_SENDER_ID": "724745692589"
+  "GOOGLE_APP_ID": "1:246695301130:ios:e5744f31cd2bc2dd360ff3",
+  "FIREBASE_PROJECT_ID": "maps-308e2",
+  "GCM_SENDER_ID": "246695301130"
 }

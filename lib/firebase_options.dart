@@ -44,38 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAqVCVJhINe_R4TGIH_VDWETDUCiIoy-BY',
-    appId: '1:724745692589:web:e760ca32f72323908bad24',
-    messagingSenderId: '724745692589',
-    projectId: 'flutter-maps-c9649',
-    authDomain: 'flutter-maps-c9649.firebaseapp.com',
-    storageBucket: 'flutter-maps-c9649.appspot.com',
-    measurementId: 'G-RRJCFJ3LE8',
+    apiKey: 'AIzaSyBgjpjqYN0pg-18uOD6Qyqs4pZg18wNcAg',
+    appId: '1:246695301130:web:484730efc8f61f97360ff3',
+    messagingSenderId: '246695301130',
+    projectId: 'maps-308e2',
+    authDomain: 'maps-308e2.firebaseapp.com',
+    storageBucket: 'maps-308e2.appspot.com',
+    measurementId: 'G-D95QYWN7KG',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBQSRLgdGjkPM4zp2Uy6hHkaLnje7d5hAw',
-    appId: '1:724745692589:android:36bd0d29af558b9e8bad24',
-    messagingSenderId: '724745692589',
-    projectId: 'flutter-maps-c9649',
-    storageBucket: 'flutter-maps-c9649.appspot.com',
+    apiKey: 'AIzaSyANn_E2TSE6LQ9Du1_fsdLVA_hOsvEAKOo',
+    appId: '1:246695301130:android:d5d2d67e3daddde7360ff3',
+    messagingSenderId: '246695301130',
+    projectId: 'maps-308e2',
+    storageBucket: 'maps-308e2.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAf_aq3eJ0lesuDmFabauOl4iiR36S1B14',
-    appId: '1:724745692589:ios:547c3aa5e379a81d8bad24',
-    messagingSenderId: '724745692589',
-    projectId: 'flutter-maps-c9649',
-    storageBucket: 'flutter-maps-c9649.appspot.com',
+    apiKey: 'AIzaSyCD_KL7II19StU6MI8AIhPqcFv31AUcCNI',
+    appId: '1:246695301130:ios:e5744f31cd2bc2dd360ff3',
+    messagingSenderId: '246695301130',
+    projectId: 'maps-308e2',
+    storageBucket: 'maps-308e2.appspot.com',
     iosBundleId: 'com.example.flutterMaps',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAf_aq3eJ0lesuDmFabauOl4iiR36S1B14',
-    appId: '1:724745692589:ios:050514c17f05935b8bad24',
-    messagingSenderId: '724745692589',
-    projectId: 'flutter-maps-c9649',
-    storageBucket: 'flutter-maps-c9649.appspot.com',
+    apiKey: 'AIzaSyCD_KL7II19StU6MI8AIhPqcFv31AUcCNI',
+    appId: '1:246695301130:ios:672b3974617d9bdc360ff3',
+    messagingSenderId: '246695301130',
+    projectId: 'maps-308e2',
+    storageBucket: 'maps-308e2.appspot.com',
     iosBundleId: 'com.example.flutterMaps.RunnerTests',
   );
 }
