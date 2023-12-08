@@ -4,11 +4,13 @@ import 'package:flutter/material.dart';
 import 'app_router.dart';
 import 'firebase_options.dart';
 
+late String intialRoute;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   runApp(FlutterMap(appRouter: AppRouter()));
 }
 
@@ -21,10 +23,10 @@ class FlutterMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       onGenerateRoute: appRouter
           .onGenerateRoute, // we removed the () => to make framework make use of it when it needed
+      //initialRoute: intialRoute,
     );
   }
 }

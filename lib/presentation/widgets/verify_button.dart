@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+//Todo : handle if it has use or not in order to delete it
 class VerifyButton extends StatelessWidget {
   const VerifyButton({super.key});
 

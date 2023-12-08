@@ -1,14 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_maps/constants/my_colors.dart';
+
+import '../../constants/my_colors.dart';
 
 //Todo:handle immutable error here
 // ignore: must_be_immutable
-class PhoneNumberTextField extends StatelessWidget {
-  PhoneNumberTextField({
+class PhoneNumberTextField extends StatefulWidget {
+  const PhoneNumberTextField({
     super.key,
   });
 
+  @override
+  State<PhoneNumberTextField> createState() => _PhoneNumberTextFieldState();
+}
+
+class _PhoneNumberTextFieldState extends State<PhoneNumberTextField> {
   late String phoneNumber;
+
+  bool userTypingNow = false;
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -16,6 +24,7 @@ class PhoneNumberTextField extends StatelessWidget {
       child: Container(
         width: double.infinity,
         height: 54 * 1.4,
+
         padding: const EdgeInsets.symmetric(
           vertical: 11,
           horizontal: 14,
@@ -25,7 +34,10 @@ class PhoneNumberTextField extends StatelessWidget {
             Radius.circular(6),
           ),
           border: Border.all(
-            color: MyColors.lightGrey,
+            width: 1,
+            color: userTypingNow
+                ? const Color.fromARGB(255, 181, 209, 248)
+                : MyColors.lightGrey,
           ),
         ),
         child: TextFormField(
@@ -41,9 +53,14 @@ class PhoneNumberTextField extends StatelessWidget {
             letterSpacing: 1.5,
           ),
           onSaved: (phoneNumOfUser) {
+            //* to trigger this method and invoke it when user clicked on next button
+            //* we should use this line _phoneFormKey.currentState!.save();
             phoneNumber = phoneNumOfUser!;
           },
-
+          onChanged: (value) {
+            userTypingNow = true;
+            setState(() {});
+          },
           validator: (phoneNumber) {
             if (phoneNumber!.isEmpty) {
               {
@@ -55,17 +72,26 @@ class PhoneNumberTextField extends StatelessWidget {
             return null;
           },
 
-          decoration: const InputDecoration(
+          decoration: InputDecoration(
             // filled: true,
             // fillColor: Colors.black,
+
+            focusedBorder: InputBorder.none
+                .copyWith(borderSide: const BorderSide(color: Colors.black)),
             hintText: "phone number",
-            hintStyle: TextStyle(color: Colors.black, fontSize: 18),
-            labelStyle: TextStyle(
+            hintStyle: const TextStyle(
+              color: Colors.black,
+              fontSize: 18,
+              fontWeight: FontWeight.w200,
+            ),
+
+            labelStyle: const TextStyle(
               color: Colors.black,
               fontSize: 23,
             ),
+
             border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(
+            contentPadding: const EdgeInsets.symmetric(
               horizontal: 9,
               vertical: 4,
             ),

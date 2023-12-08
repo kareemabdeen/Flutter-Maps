@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_maps/constants/my_colors.dart';
+
+import '../../constants/my_colors.dart';
 
 class DisplayFlagContainer extends StatelessWidget {
   const DisplayFlagContainer({super.key});
@@ -23,7 +24,14 @@ class DisplayFlagContainer extends StatelessWidget {
             color: MyColors.lightGrey,
           ),
         ),
-        child: Center(child: Text('${generateCustomFlag()}  +20')),
+        child: Center(
+            child: Text(
+          '${generateCustomFlag()} +2',
+          style: const TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w300,
+          ),
+        )),
       ),
     );
   }

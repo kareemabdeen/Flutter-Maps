@@ -1,53 +1,37 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_maps/app_router.dart';
 
-class NextButton extends StatelessWidget {
-  const NextButton({
+class CustomButton extends StatelessWidget {
+  const CustomButton({
     super.key,
-    required this.phoneValidatorState,
+    this.phoneValidatorState,
+    this.onPressed,
+    required this.text,
   });
 
-  final GlobalKey<FormState> phoneValidatorState;
-
+  final GlobalKey<FormState>? phoneValidatorState;
+  final void Function()? onPressed;
+  final String text;
   @override
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.centerRight,
       //Todo: onpressed
       child: ElevatedButton(
-        onPressed: () {
-          Navigator.pushNamed(
-            context,
-            AppRouter.otpScreen,
-          );
-        },
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           minimumSize: const Size(110, 50),
           backgroundColor: Colors.black,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(5))),
         ),
-        child: const Text(
-          'Next',
-          style: TextStyle(
+        child: Text(
+          text,
+          style: const TextStyle(
             color: Colors.white,
           ),
         ),
       ),
     );
   }
-
-  void userValidationPhoneNumber(context) {
-    Navigator.pushNamed(context, AppRouter.otpScreen);
-    if (phoneValidatorState.currentState!.validate()) {
-      log('ana ray7 ashhooof el validate scope fel textFormField');
-    } else {}
-  }
-
-  // void navigateToNextPage() {
-
-  // }
 }

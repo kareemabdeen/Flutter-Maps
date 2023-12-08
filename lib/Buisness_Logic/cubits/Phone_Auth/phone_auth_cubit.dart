@@ -14,11 +14,12 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
 
   Future<void> phoneNumberSubmitted({required String phoneNumber}) async {
     emit(Loading());
+    //! recheck this  '+2 $phoneNumber'
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: '+2$phoneNumber', // +2 => for egypt Numbers
       verificationCompleted: verificationCompleted,
       verificationFailed: verificationFailed,
-      timeout: const Duration(seconds: 16),
+      timeout: const Duration(seconds: 14),
       codeSent: codeSent,
       codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
     );
@@ -43,7 +44,8 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
   //* A forceResendingToken is only supported on Android devices, iOS devices will always return a null value).
   void codeSent(String verificationId, int? forceResendingToken) {
     emit(UserPhoneNumberSubmittedSuccessfully());
-    this.verificationId = verificationId;
+    this.verificationId =
+        verificationId; // save verificationId sent from firebase .
 
     log('codeSent');
   }
@@ -53,6 +55,7 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
   }
 
   String appropriateErrorMessageForUser(FirebaseAuthException error) {
+    log(error.code);
     switch (error.code) {
       case 'invalid-phone-number':
         return ('The provided phone number is not valid.');
@@ -84,18 +87,20 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
   //, he will try to write it in the pinCodefields
   // firebase will check equality for both
   Future<void> submitOtp({required String smsCode}) async {
+    //? why there is no loading state here
+    emit(Loading());
     PhoneAuthCredential credential = PhoneAuthProvider.credential(
       verificationId: verificationId,
       smsCode: smsCode,
     );
-    signIn(credential);
+    await signIn(credential);
   }
 
   User getLoggedInUser() {
     return FirebaseAuth.instance.currentUser!;
   }
 
-  void userLogOut() async {
+  Future<void> userLogOut() async {
     return await FirebaseAuth.instance.signOut();
   }
 }

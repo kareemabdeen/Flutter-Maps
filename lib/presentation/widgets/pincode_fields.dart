@@ -1,11 +1,17 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_maps/constants/my_colors.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../constants/my_colors.dart';
+
 class PinCodeFields extends StatelessWidget {
-  const PinCodeFields({super.key});
+  const PinCodeFields({
+    super.key,
+    required this.onCompleted,
+  });
+
+  final void Function(String)? onCompleted;
 
   @override
   Widget build(BuildContext context) {
@@ -33,10 +39,7 @@ class PinCodeFields extends StatelessWidget {
       animationDuration: const Duration(milliseconds: 300),
       backgroundColor: Colors.white,
       enableActiveFill: true,
-      onCompleted: (submitedCode) {
-        // otpCode = submitedCode;
-        log("Completed");
-      },
+      onCompleted: onCompleted,
       onChanged: (value) {
         log(value);
       },

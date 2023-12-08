@@ -4,8 +4,9 @@ import 'package:gap/gap.dart';
 class OtpIntroText extends StatelessWidget {
   const OtpIntroText({
     super.key,
+    required this.phoneNumber,
   });
-  //final String phoneNumber;
+  final String phoneNumber;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,16 +22,16 @@ class OtpIntroText extends StatelessWidget {
         ),
         const Gap(20),
         RichText(
-          text: const TextSpan(
+          text: TextSpan(
             text: 'enter your 6 Digits code numbers sent to you at ',
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black,
               height: 1.4, //* Height between to TextSpans
             ),
             children: <TextSpan>[
               TextSpan(
-                text: '+2001022647417',
-                style: TextStyle(
+                text: '+2$phoneNumber',
+                style: const TextStyle(
                   color: Colors.blue,
                 ),
               ),

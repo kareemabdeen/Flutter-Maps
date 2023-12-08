@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_maps/presentation/screens/map_screen.dart';
-import 'package:flutter_maps/presentation/screens/otp_screen.dart';
 
 import 'Buisness_Logic/cubits/Phone_Auth/phone_auth_cubit.dart';
 import 'presentation/screens/login_screen.dart';
+import 'presentation/screens/map_screen.dart';
+import 'presentation/screens/otp_screen.dart';
 
 class AppRouter {
   static const String loginPage = '/';
@@ -37,11 +37,12 @@ class AppRouter {
         );
 
       case otpScreen:
+        final String phoneNumber = settings.arguments as String;
         return MaterialPageRoute(
           builder: (_) {
             return BlocProvider<PhoneAuthCubit>.value(
               value: _phoneAuthCubit!,
-              child: const OtpScreen(),
+              child: OtpScreen(phoneNumber: phoneNumber),
             );
           },
         );
