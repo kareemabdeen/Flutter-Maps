@@ -1,12 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_maps/app_router.dart';
 
 class NextButton extends StatelessWidget {
-  const NextButton({super.key, required this.phoneValidatorState});
+  const NextButton({
+    super.key,
+    required this.phoneValidatorState,
+  });
 
   final GlobalKey<FormState> phoneValidatorState;
+
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -14,7 +19,10 @@ class NextButton extends StatelessWidget {
       //Todo: onpressed
       child: ElevatedButton(
         onPressed: () {
-          Navigator.pushNamed(context, AppRouter.otpScreen);
+          Navigator.pushNamed(
+            context,
+            AppRouter.otpScreen,
+          );
         },
         style: ElevatedButton.styleFrom(
           minimumSize: const Size(110, 50),
@@ -35,7 +43,7 @@ class NextButton extends StatelessWidget {
   void userValidationPhoneNumber(context) {
     Navigator.pushNamed(context, AppRouter.otpScreen);
     if (phoneValidatorState.currentState!.validate()) {
-      log('ana ray7a ashhooof el validate scope fel textFormField');
+      log('ana ray7 ashhooof el validate scope fel textFormField');
     } else {}
   }
 

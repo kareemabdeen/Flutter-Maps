@@ -91,7 +91,7 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
     signIn(credential);
   }
 
-  User userSignedInInfo() {
+  User getLoggedInUser() {
     return FirebaseAuth.instance.currentUser!;
   }
 

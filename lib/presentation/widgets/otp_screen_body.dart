@@ -5,8 +5,10 @@ import 'package:flutter_maps/presentation/widgets/verify_button.dart';
 import 'package:gap/gap.dart';
 
 class OtpScreenBody extends StatelessWidget {
-  const OtpScreenBody({super.key});
-
+  const OtpScreenBody({
+    super.key,
+  });
+  //final String phoneNumber;
   @override
   Widget build(BuildContext context) {
     return Container(

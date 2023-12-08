@@ -5,7 +5,7 @@ class OtpIntroText extends StatelessWidget {
   const OtpIntroText({
     super.key,
   });
-
+  //final String phoneNumber;
   @override
   Widget build(BuildContext context) {
     return Column(

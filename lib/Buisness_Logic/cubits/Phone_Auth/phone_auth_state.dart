@@ -7,7 +7,7 @@ final class PhoneAuthInitial extends PhoneAuthState {}
 
 final class Loading extends PhoneAuthState {}
 
-final class PhoneNumberSubmitted extends PhoneAuthState {}
+final class UserPhoneNumberSubmittedSuccessfully extends PhoneAuthState {}
 
 final class ErrorOccurred extends PhoneAuthState {
   final String errorMEssage;
