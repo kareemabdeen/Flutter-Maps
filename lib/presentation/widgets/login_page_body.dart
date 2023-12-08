@@ -2,13 +2,15 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../helpers/show_progress_indicator.dart';
+import '../../helpers/show_snackbar.dart';
+import 'phone_form_field.dart';
 import 'package:gap/gap.dart';
 
 import '../../Buisness_Logic/cubits/Phone_Auth/phone_auth_cubit.dart';
 import '../../app_router.dart';
 import 'login_intro_text_widget.dart';
 import 'next_button.dart';
-import 'phone_form_field.dart';
 
 class LoginPageBody extends StatefulWidget {
   const LoginPageBody({super.key});
@@ -18,8 +20,6 @@ class LoginPageBody extends StatefulWidget {
 }
 
 class _LoginPageBodyState extends State<LoginPageBody> {
-  late String phoneNumber = '';
-
   final GlobalKey<FormState> phoneValidatorState = GlobalKey<FormState>();
 
   @override
@@ -44,12 +44,12 @@ In the context of Bloc, this can be useful to //?optimize performance.
           Navigator.pushNamed(
             context,
             AppRouter.otpScreen,
-            arguments: phoneNumber,
+            arguments: BlocProvider.of<PhoneAuthCubit>(context).phoneNumber,
           );
         }
         if (state is ErrorOccurred) {
           Navigator.pop(context);
-          showSnackBar(context, errorMessage: state.errorMEssage);
+          showSnackBar(context, errorMessage: state.errorMessage);
         }
       },
       child: Container(
@@ -61,7 +61,8 @@ In the context of Bloc, this can be useful to //?optimize performance.
             children: [
               const LoginIntroText(),
               const Gap(135),
-              PhoneFormField(phoneNumber: phoneNumber),
+              //buildPhoneFormField(),
+              const PhoneFormField(),
               const Gap(70),
               CustomButton(
                 text: 'Next',
@@ -80,46 +81,6 @@ In the context of Bloc, this can be useful to //?optimize performance.
     );
   }
 
-  void showProgressIndicator(BuildContext context) {
-    AlertDialog alertDialog = const AlertDialog(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      content: Center(
-        child: CircularProgressIndicator(
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.black),
-        ),
-      ),
-    );
-
-    showDialog(
-      barrierColor: Colors.white.withOpacity(0),
-      barrierDismissible: false,
-      context: context,
-      builder: (context) {
-        return alertDialog;
-      },
-    );
-  }
-
-  void showSnackBar(context, {required String errorMessage}) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          errorMessage,
-          style: const TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        elevation: 0,
-        showCloseIcon: true,
-        // animation: AnimationMax(
-        //     const AlwaysStoppedAnimation(2), const AlwaysStoppedAnimation(5)),
-        backgroundColor: Colors.black,
-        duration: const Duration(seconds: 3),
-      ),
-    );
-  }
-
   Future<void> register() async {
     if (phoneValidatorState.currentState!.validate()) // validate the condition
     {
@@ -127,12 +88,12 @@ In the context of Bloc, this can be useful to //?optimize performance.
       //  Navigator.pop(context); //*to remove the circullar indicator from the page
       phoneValidatorState.currentState!.save();
 
-      await BlocProvider.of<PhoneAuthCubit>(context)
-          .phoneNumberSubmitted(phoneNumber: phoneNumber);
+      await BlocProvider.of<PhoneAuthCubit>(context).phoneNumberSubmitted(
+          phoneNumber: BlocProvider.of<PhoneAuthCubit>(context).phoneNumber);
     } else {
       //validator show error
       //*to remove the circullar indicator from the page , to solve the given error
-      Navigator.pop(context); // remo
+      Navigator.pop(context);
     }
   }
 }

@@ -10,11 +10,15 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
   PhoneAuthCubit() : super(PhoneAuthInitial());
 
   late String verificationId;
+  late String phoneNumber;
+
   //triggering when user submit its phone number
 
   Future<void> phoneNumberSubmitted({required String phoneNumber}) async {
     emit(Loading());
+
     //! recheck this  '+2 $phoneNumber'
+    log('+2$phoneNumber');
     await FirebaseAuth.instance.verifyPhoneNumber(
       phoneNumber: '+2$phoneNumber', // +2 => for egypt Numbers
       verificationCompleted: verificationCompleted,
@@ -25,16 +29,17 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
     );
   }
 
-  void verificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+  Future<void> verificationCompleted(
+      PhoneAuthCredential phoneAuthCredential) async {
     log("verificationCompleted");
 
-    signIn(phoneAuthCredential);
+    await signIn(phoneAuthCredential);
   }
 
   void verificationFailed(FirebaseAuthException error) {
     // notify ui with the state to handle it with the appropriate widget for error
     emit(ErrorOccurred(
-      errorMEssage: appropriateErrorMessageForUser(error),
+      errorMessage: appropriateErrorMessageForUser(error),
     )); //Todo : handle it later
 
     log('verificationFailed');
@@ -79,7 +84,7 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
       await FirebaseAuth.instance.signInWithCredential(credential);
       emit(PhoneOtpVerified());
     } catch (error) {
-      emit(ErrorOccurred(errorMEssage: error.toString()));
+      emit(ErrorOccurred(errorMessage: error.toString()));
     }
   }
 
@@ -100,7 +105,16 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
     return FirebaseAuth.instance.currentUser!;
   }
 
+  // Future<void> userLogOut() async {
+  //   return await FirebaseAuth.instance.signOut();
+  // }
   Future<void> userLogOut() async {
-    return await FirebaseAuth.instance.signOut();
+    try {
+      await FirebaseAuth.instance.signOut();
+    } catch (error) {
+      emit(ErrorOccurred(
+        errorMessage: error.toString(),
+      ));
+    }
   }
 }

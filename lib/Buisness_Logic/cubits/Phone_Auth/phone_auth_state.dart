@@ -10,9 +10,9 @@ final class Loading extends PhoneAuthState {}
 final class UserPhoneNumberSubmittedSuccessfully extends PhoneAuthState {}
 
 final class ErrorOccurred extends PhoneAuthState {
-  final String errorMEssage;
+  final String errorMessage;
 
-  ErrorOccurred({required this.errorMEssage});
+  ErrorOccurred({required this.errorMessage});
 }
 
 final class PhoneOtpVerified extends PhoneAuthState {}

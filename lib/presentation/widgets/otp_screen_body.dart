@@ -47,7 +47,7 @@ class _OtpScreenBodyState extends State<OtpScreenBody> {
           }
           if (state is ErrorOccurred) {
             Navigator.pop(context);
-            showSnackBar(context, errorMessage: state.errorMEssage);
+            showSnackBar(context, errorMessage: state.errorMessage);
             log('ana fel ErrorOccurred state ');
           }
         },
