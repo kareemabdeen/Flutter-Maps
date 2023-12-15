@@ -1,15 +1,12 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_maps/firebase_options.dart';
 
 import 'app_router.dart';
+import 'helpers/main_important_functions.dart';
 
-late String intialRoute;
+late String initialRoute;
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await initializeApp();
+  determineInitialRoute();
 
   runApp(FlutterMap(appRouter: AppRouter()));
 }
@@ -26,7 +23,7 @@ class FlutterMap extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       onGenerateRoute: appRouter
           .onGenerateRoute, // we removed the () => to make framework make use of it when it needed
-      //initialRoute: intialRoute,
+      initialRoute: initialRoute,
     );
   }
 }

@@ -7,7 +7,7 @@ import 'presentation/screens/map_screen.dart';
 import 'presentation/screens/otp_screen.dart';
 
 class AppRouter {
-  static const String loginPage = '/';
+  static const String loginPage = '/Login-screen';
   static const String otpScreen = '/otpScreen';
   static const String mapScreen = '/mapScreen';
 

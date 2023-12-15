@@ -11,8 +11,10 @@ void showSnackBar(context, {required String errorMessage}) {
       ),
       elevation: 0,
       showCloseIcon: true,
-      // animation: AnimationMax(
-      //     const AlwaysStoppedAnimation(2), const AlwaysStoppedAnimation(5)),
+      animation: AnimationMax(
+        const AlwaysStoppedAnimation(2),
+        const AlwaysStoppedAnimation(5),
+      ),
       backgroundColor: Colors.black,
       duration: const Duration(seconds: 3),
     ),

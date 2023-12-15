@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_maps/Buisness_Logic/cubits/Phone_Auth/phone_auth_cubit.dart';
-import 'package:flutter_maps/constants/my_colors.dart';
+
+import '../../Buisness_Logic/cubits/Phone_Auth/phone_auth_cubit.dart';
+import '../../constants/my_colors.dart';
 
 class PhoneFormTextField extends StatelessWidget {
   const PhoneFormTextField({super.key});

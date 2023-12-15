@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_maps/presentation/widgets/phone_number_textfield_widget.dart';
+import 'phone_number_textfield_widget.dart';
 import 'package:gap/gap.dart';
 
 import 'flag_container_widget.dart';
