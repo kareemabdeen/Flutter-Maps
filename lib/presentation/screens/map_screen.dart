@@ -39,10 +39,10 @@ class _MapScreenState extends State<MapScreen> {
   }
 
   static final CameraPosition currentUserCameraPosition = CameraPosition(
-    bearing: 192.8334901395799,
+    bearing: 0.0,
     target: LatLng(position!.latitude, position!.longitude),
-    tilt: 59.440717697143555,
-    zoom: 19.151926040649414,
+    tilt: 0.0,
+    zoom: 17,
   );
   final Completer<GoogleMapController> _mapController =
       Completer<GoogleMapController>();
@@ -50,9 +50,10 @@ class _MapScreenState extends State<MapScreen> {
   Widget buildMaps() {
     return GoogleMap(
       initialCameraPosition: currentUserCameraPosition,
-      mapType: MapType.satellite,
+      mapType: MapType.normal,
       myLocationButtonEnabled: false,
       zoomControlsEnabled: false,
+      myLocationEnabled: true, // circled blue point on my map
       //*Callback method for when the map is ready to be used.
       //* Used to receive a [GoogleMapController] for this [GoogleMap].
       onMapCreated: (GoogleMapController controller) {

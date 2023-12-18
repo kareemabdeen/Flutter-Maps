@@ -16,7 +16,7 @@ class CustomDrawer extends StatefulWidget {
 }
 
 class _CustomDrawerState extends State<CustomDrawer> {
-  late PhoneAuthCubit phoneAuthCubit;
+  final PhoneAuthCubit phoneAuthCubit = PhoneAuthCubit();
 
   @override
   Widget build(BuildContext context) {
