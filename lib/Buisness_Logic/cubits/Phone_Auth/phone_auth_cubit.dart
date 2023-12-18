@@ -29,7 +29,7 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
 
       verificationFailed: verificationFailed,
 
-      timeout: const Duration(seconds: 14),
+      timeout: const Duration(seconds: 30),
 
       codeSent: codeSent,
 
@@ -110,11 +110,8 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
   }
 
   // user input after the verification code sent to him
-
   //, he will try to write it in the pinCodefields
-
   // firebase will check equality for both
-
   Future<void> submitOtp({required String smsCode}) async {
     //? why there is no loading state here
 
@@ -131,22 +128,19 @@ class PhoneAuthCubit extends Cubit<PhoneAuthState> {
   }
 
   User getLoggedInUser() {
+    // return inside it all info about the user
     return FirebaseAuth.instance.currentUser!;
   }
-
-  // Future<void> userLogOut() async {
-
-  //   return await FirebaseAuth.instance.signOut();
-
-  // }
 
   Future<void> userLogOut() async {
     try {
       await FirebaseAuth.instance.signOut();
     } catch (error) {
-      emit(ErrorOccurred(
-        errorMessage: error.toString(),
-      ));
+      emit(
+        ErrorOccurred(
+          errorMessage: error.toString(),
+        ),
+      );
     }
   }
 }

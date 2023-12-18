@@ -20,6 +20,9 @@ class FlutterMap extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        dividerColor: Colors.transparent,
+      ),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: appRouter
           .onGenerateRoute, // we removed the () => to make framework make use of it when it needed

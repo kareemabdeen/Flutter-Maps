@@ -23,22 +23,25 @@ class OtpIntroText extends StatelessWidget {
           ),
         ),
         const Gap(20),
-        RichText(
-          text: TextSpan(
-            text: 'enter your 6 Digits code numbers sent to you at ',
-            style: const TextStyle(
-              color: Colors.black,
+        GestureDetector(
+          onTap: () => Navigator.pop(context),
+          child: RichText(
+            text: TextSpan(
+              text: 'enter your 6 Digits code numbers sent to you at ',
+              style: const TextStyle(
+                color: Colors.black,
 
-              height: 1.4, //* Height between to TextSpans
-            ),
-            children: <TextSpan>[
-              TextSpan(
-                text: '+2$phoneNumber',
-                style: const TextStyle(
-                  color: Colors.blue,
-                ),
+                height: 1.4, //* Height between to TextSpans
               ),
-            ],
+              children: <TextSpan>[
+                TextSpan(
+                  text: '+2$phoneNumber',
+                  style: const TextStyle(
+                    color: Colors.blue,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ],
