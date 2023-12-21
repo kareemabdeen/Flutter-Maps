@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_maps/DataBase/dependency_injection.dart';
 
 import 'app_router.dart';
 import 'helpers/main_important_functions.dart';
@@ -7,12 +8,12 @@ late String initialRoute;
 void main() async {
   await initializeApp();
   determineInitialRoute();
-
-  runApp(FlutterMap(appRouter: AppRouter()));
+  setupDependencyInjection();
+  runApp(FlutterMaps(appRouter: AppRouter()));
 }
 
-class FlutterMap extends StatelessWidget {
-  const FlutterMap({super.key, required this.appRouter});
+class FlutterMaps extends StatelessWidget {
+  const FlutterMaps({super.key, required this.appRouter});
 
   final AppRouter appRouter;
 
