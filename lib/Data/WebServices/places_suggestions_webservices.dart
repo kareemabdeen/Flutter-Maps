@@ -1,11 +1,13 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
+import 'package:flutter_maps/constants/strings.dart';
 
 class PlaceSuggestionsWebServices {
   late Dio dio;
 
   PlaceSuggestionsWebServices() {
     BaseOptions options = BaseOptions(
-      //  baseUrl: kBasicUrl,
       receiveDataWhenStatusError: true,
       connectTimeout: const Duration(seconds: 5),
       receiveTimeout: const Duration(seconds: 3),
@@ -13,11 +15,24 @@ class PlaceSuggestionsWebServices {
     dio = Dio(options);
   }
 
-  // Future<List<dynamic>> placesSuggestion({required String userSearchInput}) async {
-  //   try {
-  //     Response response = dio.get(,queryParameters:);
-  //   } catch (error) {
-  //     log(error.toString());
-  //   }
-  // }
+  Future<List<dynamic>> fetchPlacesSuggestion(
+      {required String userSearchInput,
+      required String generatedSessionToken}) async {
+    try {
+      Response response = await dio.get(
+        suggestionsBaseUrl,
+        queryParameters: {
+          'key': googleAPIKey,
+          "input": userSearchInput,
+          "components": "country:eg",
+          "sessiontoken": generatedSessionToken,
+          "type": "restaurant",
+        },
+      );
+      return await response.data['predictions'];
+    } catch (error) {
+      log(error.toString());
+      return [];
+    }
+  }
 }
