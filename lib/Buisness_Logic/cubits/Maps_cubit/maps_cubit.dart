@@ -19,7 +19,7 @@ class MapsCubit extends Cubit<MapsState> {
             generatedSessionToken: generatedSessionToken)
         .then((placesSuggestationsResult) => {
               emit(PlacesLoaddedsuccesfully(
-                  placesSuggestationsResults:
+                  places:
                       placesSuggestationsResult as List<PlacesSuggestations>))
             });
   }

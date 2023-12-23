@@ -7,7 +7,7 @@ final class MapsInitial extends MapsState {}
 
 final class PlacesLoaddedsuccesfully extends MapsState {
   //todo: List<dynamic>
-  final List<PlacesSuggestations> placesSuggestationsResults;
+  final List<PlacesSuggestations> places;
 
-  PlacesLoaddedsuccesfully({required this.placesSuggestationsResults});
+  PlacesLoaddedsuccesfully({required this.places});
 }

@@ -84,7 +84,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
         ],
       ),
     );
-  } 
+  }
 
   Widget buildLogoutBlocProvider(context) {
     // ignore: avoid_unnecessary_containers
