@@ -16,23 +16,43 @@ class PlaceSuggestionsWebServices {
   }
 
   Future<List<dynamic>> fetchPlacesSuggestion(
-      {required String userSearchInput,
-      required String generatedSessionToken}) async {
+      {required String userSearchInput, required String sessionToken}) async {
     try {
       Response response = await dio.get(
         suggestionsBaseUrl,
         queryParameters: {
           'key': googleAPIKey,
           "input": userSearchInput,
+          'types': 'address',
           "components": "country:eg",
-          "sessiontoken": generatedSessionToken,
-          "type": "restaurant",
+          "sessiontoken": sessionToken,
+          //"type": "restaurant",
         },
       );
+      log(response.data['predictions'].toString());
+
       return await response.data['predictions'];
     } catch (error) {
       log(error.toString());
       return [];
+    }
+  }
+
+  Future<dynamic> fetchPlaceLocation(
+      {required String placeId, required String sessionToken}) async {
+    try {
+      Response response = await dio.get(
+        placeDetailsBaseUrl,
+        queryParameters: {
+          'key': googleAPIKey,
+          "place_id": placeId, //Todo:recheck for it later
+          "sessiontoken": sessionToken,
+        },
+      );
+
+      return await response.data;
+    } catch (error) {
+      return Future.error(error); //Todo later
     }
   }
 }

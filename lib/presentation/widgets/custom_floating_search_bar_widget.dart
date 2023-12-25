@@ -22,8 +22,9 @@ class _CustomFloatingSearchBarState extends State<CustomFloatingSearchBar> {
   Widget build(BuildContext context) {
     final isPortrait =
         MediaQuery.of(context).orientation == Orientation.portrait;
-
+    GlobalKey<FormState> floatingSearckKey = GlobalKey();
     return FloatingSearchBar(
+      key: floatingSearckKey,
       controller: _searchController,
       elevation: 6,
       onQueryChanged: (query) {
@@ -77,7 +78,6 @@ class _CustomFloatingSearchBarState extends State<CustomFloatingSearchBar> {
   }
 
   void getplacesSuggestations({required String query}) {
-    //Todo: import Uuid library to my yaml
     final sessionToken = const Uuid().v4();
     BlocProvider.of<MapsCubit>(context).emitplacesSuggestations(
         userSearchInput: query, generatedSessionToken: sessionToken);

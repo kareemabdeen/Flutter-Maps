@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_maps/Data/models/places_suggestations.dart';
 import 'package:flutter_maps/constants/my_colors.dart';
@@ -9,6 +11,7 @@ class PlacesSuggestationsListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var subTitle = suggestion.description
         .replaceAll(suggestion.description.split(',')[0], '');
+    log("subtitile : $subTitle");
     return Container(
       width: double.infinity,
       margin: const EdgeInsetsDirectional.all(8),

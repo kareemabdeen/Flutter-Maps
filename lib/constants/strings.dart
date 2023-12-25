@@ -3,7 +3,7 @@ const googleAPIKey = 'AIzaSyDzN1PVU-CNfGglqYCxbPMF1SmwqoYmBU8';
 const suggestionsBaseUrl =
     'https://maps.googleapis.com/maps/api/place/autocomplete/json';
 
-const placeLocationBaseUrl =
+const placeDetailsBaseUrl =
     'https://maps.googleapis.com/maps/api/place/details/json';
 
 const directionsBaseUrl =

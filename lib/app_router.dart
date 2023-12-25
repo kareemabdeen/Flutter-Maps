@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_maps/Buisness_Logic/cubits/Maps_cubit/maps_cubit.dart';
-import 'package:flutter_maps/Data/repository/places_suggestations_repo.dart';
 import 'package:flutter_maps/DataBase/dependency_injection.dart';
 
 import 'Buisness_Logic/cubits/Phone_Auth/phone_auth_cubit.dart';
@@ -26,8 +25,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (_) {
             return BlocProvider<MapsCubit>(
-              create: (context) =>
-                  MapsCubit(getIt<PlaceSuggestionsRepostory>()),
+              create: (context) => getIt<MapsCubit>(),
               child: const MapScreen(),
             );
           },

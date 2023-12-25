@@ -11,3 +11,9 @@ final class PlacesLoaddedsuccesfully extends MapsState {
 
   PlacesLoaddedsuccesfully({required this.places});
 }
+
+final class PlaceDetailsLoadedSuccesfully extends MapsState {
+  final Place place;
+
+  PlaceDetailsLoadedSuccesfully({required this.place});
+}
