@@ -47,12 +47,16 @@ class PlaceSuggestionsWebServices {
           'key': googleAPIKey,
           "place_id": placeId, //Todo:recheck for it later
           "sessiontoken": sessionToken,
+          "fields": "geometry",
+          "components": "country:eg",
         },
       );
 
       return await response.data;
     } catch (error) {
-      return Future.error(error); //Todo later
+      //Todo:search for it later
+      return Future.error("place location error :",
+          StackTrace.fromString("this is its trace "));
     }
   }
 }

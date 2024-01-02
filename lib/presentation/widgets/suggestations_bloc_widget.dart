@@ -27,7 +27,6 @@ class _SuggestationsBlocState extends State<SuggestationsBloc> {
           if (places.isNotEmpty) {
             return SuggestationListView(
               // todo : be focus dont miss to putting return statment again !!
-
               suggestedPlaces: places,
               searchController: widget.searchController,
             );

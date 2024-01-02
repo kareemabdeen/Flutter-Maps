@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_maps/Buisness_Logic/cubits/Maps_cubit/maps_cubit.dart';
 import 'package:flutter_maps/helpers/location_helper.dart';
 import 'package:flutter_maps/presentation/widgets/custom_drawer_widget.dart';
 import 'package:flutter_maps/presentation/widgets/custom_floating_button_widget.dart';
@@ -19,6 +21,7 @@ class _MapScreenState extends State<MapScreen> {
   static Position? position;
   final Completer<GoogleMapController> _mapController =
       Completer<GoogleMapController>(); //Todo : should be closed
+  final Set<Marker> markers = {}; // passing to cubit
 
   static final CameraPosition currentUserCameraPosition = CameraPosition(
     bearing: 0.0,
@@ -36,6 +39,7 @@ class _MapScreenState extends State<MapScreen> {
   //! mapsScreenBody
   Widget buildMaps() {
     return GoogleMap(
+      markers: markers,
       initialCameraPosition: currentUserCameraPosition,
       mapType: MapType.normal,
       myLocationButtonEnabled: false,
@@ -65,11 +69,14 @@ class _MapScreenState extends State<MapScreen> {
                     color: Colors.black,
                   ),
                 ),
-          const CustomFloatingSearchBar(),
+          CustomFloatingSearchBar(
+            mapController: _mapController,
+            markers: markers,
+          ),
         ],
       ),
       floatingActionButton: CustomFloatingActionButton(
-        onPressed: _goToMyCurrentLocation, //! its working right without ()=>
+        onPressed: _goToMyCurrentLocation,
       ),
     );
   }
@@ -92,5 +99,11 @@ class _MapScreenState extends State<MapScreen> {
     await controller.animateCamera(
       CameraUpdate.newCameraPosition(currentUserCameraPosition),
     );
+    saveUserCameraPositionOnMapCubit();
+  }
+
+  void saveUserCameraPositionOnMapCubit() {
+    BlocProvider.of<MapsCubit>(context).currentUserCameraPosition =
+        currentUserCameraPosition;
   }
 }

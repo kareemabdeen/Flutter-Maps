@@ -3,12 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_maps/Data/models/place_model.dart';
 import 'package:flutter_maps/Data/models/places_suggestations.dart';
 import 'package:flutter_maps/Data/repository/places_suggestations_repo.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 part 'maps_state.dart';
 
 class MapsCubit extends Cubit<MapsState> {
   final PlaceSuggestionsRepostory placesSuggestionsRepostory;
-
+  late PlacesSuggestations selectedSuggestionPlace;
+  late final CameraPosition currentUserCameraPosition;
   MapsCubit(this.placesSuggestionsRepostory) : super(MapsInitial());
 
   Future<void> emitplacesSuggestations(
