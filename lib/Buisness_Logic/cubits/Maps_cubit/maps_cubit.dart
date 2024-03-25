@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_maps/Data/models/place_model.dart';
-import 'package:flutter_maps/Data/models/places_suggestations.dart';
-import 'package:flutter_maps/Data/repository/places_suggestations_repo.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../../../Data/models/place_model.dart';
+import '../../../Data/models/places_suggestations.dart';
+import '../../../Data/repository/places_suggestations_repo.dart';
 
 part 'maps_state.dart';
 
 class MapsCubit extends Cubit<MapsState> {
   final PlaceSuggestionsRepostory placesSuggestionsRepostory;
   late PlacesSuggestations selectedSuggestionPlace;
-  late final CameraPosition currentUserCameraPosition;
+  late CameraPosition currentUserCameraPosition;
+  Set<Marker>? markers;
   MapsCubit(this.placesSuggestionsRepostory) : super(MapsInitial());
 
   Future<void> emitplacesSuggestations(
@@ -41,5 +43,9 @@ class MapsCubit extends Cubit<MapsState> {
             ),
           },
         );
+  }
+
+  void emitMarkersLoaded() {
+    emit(MarkersLoaded(markers: markers ?? {}));
   }
 }

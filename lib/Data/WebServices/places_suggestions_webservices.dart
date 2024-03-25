@@ -1,7 +1,8 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:flutter_maps/constants/strings.dart';
+
+import '../../constants/strings.dart';
 
 class PlaceSuggestionsWebServices {
   late Dio dio;

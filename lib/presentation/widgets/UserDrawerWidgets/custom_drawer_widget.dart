@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_maps/Buisness_Logic/cubits/Phone_Auth/phone_auth_cubit.dart';
-import 'package:flutter_maps/app_router.dart';
-import 'package:flutter_maps/presentation/widgets/custom_divider_widget.dart';
-import 'package:flutter_maps/presentation/widgets/drawer_header_widget.dart';
-import 'package:flutter_maps/presentation/widgets/drawer_list_item.dart';
-import 'package:flutter_maps/presentation/widgets/social_media_icons_widget.dart';
 import 'package:gap/gap.dart';
+
+import '../../../Buisness_Logic/cubits/Phone_Auth/phone_auth_cubit.dart';
+import '../../../app_router.dart';
+import 'custom_divider_widget.dart';
+import 'drawer_header_widget.dart';
+import 'drawer_list_item.dart';
+import 'social_media_icons_widget.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});

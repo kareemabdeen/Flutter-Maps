@@ -1,8 +1,9 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_maps/Data/models/places_suggestations.dart';
-import 'package:flutter_maps/constants/my_colors.dart';
+
+import '../../../Data/models/places_suggestations.dart';
+import '../../../constants/my_colors.dart';
 
 class PlacesSuggestationsListItem extends StatelessWidget {
   const PlacesSuggestationsListItem({super.key, required this.suggestion});

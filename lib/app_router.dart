@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_maps/Buisness_Logic/cubits/Maps_cubit/maps_cubit.dart';
-import 'package:flutter_maps/DataBase/dependency_injection.dart';
 
+import 'Buisness_Logic/cubits/Maps_cubit/maps_cubit.dart';
 import 'Buisness_Logic/cubits/Phone_Auth/phone_auth_cubit.dart';
+import 'DataBase/dependency_injection.dart';
 import 'presentation/screens/login_screen.dart';
 import 'presentation/screens/map_screen.dart';
 import 'presentation/screens/otp_screen.dart';

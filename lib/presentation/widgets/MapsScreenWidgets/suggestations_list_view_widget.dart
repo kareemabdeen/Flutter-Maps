@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_maps/Buisness_Logic/cubits/Maps_cubit/maps_cubit.dart';
-import 'package:flutter_maps/Data/models/places_suggestations.dart';
-import 'package:flutter_maps/helpers/maps_helper.dart';
-import 'package:flutter_maps/presentation/widgets/suggestations_ltem_widget.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
+
+import '../../../Buisness_Logic/cubits/Maps_cubit/maps_cubit.dart';
+import '../../../Data/models/places_suggestations.dart';
+import '../../../helpers/maps_helper.dart';
+import '../MapsScreenWidgets/suggestations_ltem_widget.dart';
 
 class SuggestationListView extends StatefulWidget {
   const SuggestationListView({

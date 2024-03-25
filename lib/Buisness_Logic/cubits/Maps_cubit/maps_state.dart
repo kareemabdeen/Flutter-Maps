@@ -17,3 +17,9 @@ final class PlaceDetailsLoadedSuccesfully extends MapsState {
 
   PlaceDetailsLoadedSuccesfully({required this.place});
 }
+
+final class MarkersLoaded extends MapsState {
+  final Set<Marker> markers;
+
+  MarkersLoaded({required this.markers});
+}

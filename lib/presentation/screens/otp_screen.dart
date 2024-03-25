@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/otp_screen_body.dart';
+import '../widgets/OtpScreenWidgets/otp_screen_body.dart';
 
 class OtpScreen extends StatelessWidget {
   const OtpScreen({

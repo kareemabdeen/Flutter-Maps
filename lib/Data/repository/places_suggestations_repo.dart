@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:flutter_maps/Data/WebServices/places_suggestions_webservices.dart';
-import 'package:flutter_maps/Data/models/place_model.dart';
-import 'package:flutter_maps/Data/models/places_suggestations.dart';
+import '../WebServices/places_suggestions_webservices.dart';
+import '../models/place_model.dart';
+import '../models/places_suggestations.dart';
 
 class PlaceSuggestionsRepostory {
   final PlaceSuggestionsWebServices placeSuggestionsWebServices;

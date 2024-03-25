@@ -1,15 +1,39 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_maps/DataBase/dependency_injection.dart';
 
+import 'DataBase/dependency_injection.dart';
 import 'app_router.dart';
-import 'helpers/main_important_functions.dart';
+import 'firebase_options.dart';
 
 late String initialRoute;
-void main() async {
-  await initializeApp();
+void determineInitialRoute() {
+  FirebaseAuth.instance.authStateChanges().listen(
+    (user) {
+      if (user == null) {
+        initialRoute =
+            AppRouter.loginPage; // this is the first time for the user
+      } else {
+        initialRoute = AppRouter
+            .mapScreen; // this is the second time and naviagte to maps Screen
+      }
+    },
+  );
+}
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   determineInitialRoute();
   setupDependencyInjection();
-  runApp(FlutterMaps(appRouter: AppRouter()));
+  runApp(
+    FlutterMaps(
+      appRouter: AppRouter(),
+    ),
+  );
 }
 
 class FlutterMaps extends StatelessWidget {

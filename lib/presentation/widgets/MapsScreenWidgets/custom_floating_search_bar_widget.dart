@@ -1,20 +1,25 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_maps/Buisness_Logic/cubits/Maps_cubit/maps_cubit.dart';
-import 'package:flutter_maps/Data/models/place_model.dart';
-import 'package:flutter_maps/constants/my_colors.dart';
-import 'package:flutter_maps/helpers/maps_helper.dart';
-import 'package:flutter_maps/presentation/widgets/suggestations_bloc_widget.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 
+import '../../../Buisness_Logic/cubits/Maps_cubit/maps_cubit.dart';
+import '../../../Data/models/place_model.dart';
+import '../../../DataBase/dependency_injection.dart';
+import '../../../constants/my_colors.dart';
+import '../../../helpers/maps_helper.dart';
+import '../MapsScreenWidgets/suggestations_bloc_widget.dart';
+
 class CustomFloatingSearchBar extends StatefulWidget {
-  const CustomFloatingSearchBar(
-      {super.key, required this.mapController, required this.markers});
+  const CustomFloatingSearchBar({
+    super.key,
+    required this.mapController,
+  });
   final Completer<GoogleMapController> mapController;
-  final Set<Marker> markers;
+
   @override
   State<CustomFloatingSearchBar> createState() =>
       _CustomFloatingSearchBarState();
@@ -23,6 +28,7 @@ class CustomFloatingSearchBar extends StatefulWidget {
 class _CustomFloatingSearchBarState extends State<CustomFloatingSearchBar> {
   final FloatingSearchBarController _searchController =
       FloatingSearchBarController();
+  late Set<Marker> markers = {};
   late Place placeDetails;
   late CameraPosition selectedPlaceCameraPosition;
 
@@ -92,6 +98,7 @@ class _CustomFloatingSearchBarState extends State<CustomFloatingSearchBar> {
                 searchController: _searchController,
               ),
               buildSelectedPlaceDetailsBloc(),
+              buildMarkerBloc(),
             ],
           ),
         );
@@ -144,56 +151,70 @@ class _CustomFloatingSearchBarState extends State<CustomFloatingSearchBar> {
         title: "your searched place",
         snippet: "kimo is done ",
       ),
-      icon: BitmapDescriptor.hueRed as BitmapDescriptor,
+      // icon: (BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)),
     );
-    addMarkerToMarkersSetAndUpdateUi(searchedPlaceMarker);
+    addMarkerToMarkersSetAndUpdateUi(marker: searchedPlaceMarker);
+  }
+
+  void addMarkerToMarkersSetAndUpdateUi({required Marker marker}) {
+    markers.add(marker);
+    context.read<MapsCubit>().markers = markers;
+    //`BlocProvider.of<MapsCubit>(context).markers = markers;
+    BlocProvider.of<MapsCubit>(context).emitMarkersLoaded();
   }
 
   void buildCurrentLocationMarker() {
     currentLoactionMarker = Marker(
       markerId: const MarkerId('1'),
-      position: BlocProvider.of<MapsCubit>(context)
-          .currentUserCameraPosition
-          .target, //Todo access from cubit is more meaningfull.
-      icon: (BitmapDescriptor.defaultMarkerWithHue(
-          BitmapDescriptor.hueBlue)), // todo ensure that this cast is right .
+      position:
+          BlocProvider.of<MapsCubit>(context).currentUserCameraPosition.target,
+      icon: (BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)),
       infoWindow: const InfoWindow(
         title: "Your Current Location",
       ),
     );
-    addMarkerToMarkersSetAndUpdateUi(currentLoactionMarker);
+    addMarkerToMarkersSetAndUpdateUi(marker: currentLoactionMarker);
   }
 
-  void addMarkerToMarkersSetAndUpdateUi(Marker marker) {
-    setState(() {
-      widget.markers.add(marker);
-    });
-  }
-}
-
-//! refactored code
-class SelectedPlaceDetailsBloc extends StatefulWidget {
-  const SelectedPlaceDetailsBloc({super.key});
-
-  @override
-  State<SelectedPlaceDetailsBloc> createState() =>
-      _SelectedPlaceDetailsBlocState();
-}
-
-class _SelectedPlaceDetailsBlocState extends State<SelectedPlaceDetailsBloc> {
-  late Place placeDetails;
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocListener<MapsCubit, MapsState>(
-      listener: (context, state) {
-        if (state is PlaceDetailsLoadedSuccesfully) {
-          placeDetails = (state).place;
-          goToSearchedLocationOnMap(state);
+  Widget buildMarkerBloc() {
+    return BlocBuilder<MapsCubit, MapsState>(
+      bloc: getIt<MapsCubit>(),
+      builder: (context, state) {
+        if (state is MarkersLoaded) {
+          markers = (state).markers;
+          log('======================= $markers');
         }
+        return Container();
       },
-      child:
-          Container(), //Todo fix child added any thing in order not to throw exception
     );
   }
 }
+
+// //! refactored code
+// class SelectedPlaceDetailsBloc extends StatefulWidget {
+//   const SelectedPlaceDetailsBloc({super.key});
+
+//   @override
+//   State<SelectedPlaceDetailsBloc> createState() =>
+//       _SelectedPlaceDetailsBlocState();
+// }
+
+// class _SelectedPlaceDetailsBlocState extends State<SelectedPlaceDetailsBloc> {
+//   late Place placeDetails;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return BlocListener<MapsCubit, MapsState>(
+//       listener: (context, state) {
+//         if (state is PlaceDetailsLoadedSuccesfully) {
+//           placeDetails = (state).place;
+//           goToSearchedLocationOnMap(state);
+
+//         }
+//       },
+//       child:
+//           Container(), //Todo fix child added any thing in order not to throw exception
+//     );
+//   }
+
+// }

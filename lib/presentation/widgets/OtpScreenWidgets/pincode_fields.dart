@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../../constants/my_colors.dart';
+import '../../../constants/my_colors.dart';
 
 class PinCodeFields extends StatelessWidget {
   const PinCodeFields({

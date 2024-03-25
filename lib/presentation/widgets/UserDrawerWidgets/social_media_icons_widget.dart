@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_maps/presentation/widgets/custom_icon_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'custom_icon_widget.dart';
 
 class BuildSocialMediaIcons extends StatelessWidget {
   const BuildSocialMediaIcons({super.key});

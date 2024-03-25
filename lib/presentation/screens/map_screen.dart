@@ -1,14 +1,16 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_maps/Buisness_Logic/cubits/Maps_cubit/maps_cubit.dart';
-import 'package:flutter_maps/helpers/location_helper.dart';
-import 'package:flutter_maps/presentation/widgets/custom_drawer_widget.dart';
-import 'package:flutter_maps/presentation/widgets/custom_floating_button_widget.dart';
-import 'package:flutter_maps/presentation/widgets/custom_floating_search_bar_widget.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../../Buisness_Logic/cubits/Maps_cubit/maps_cubit.dart';
+import '../../helpers/location_helper.dart';
+import '../widgets/MapsScreenWidgets/custom_floating_button_widget.dart';
+import '../widgets/MapsScreenWidgets/custom_floating_search_bar_widget.dart';
+import '../widgets/UserDrawerWidgets/custom_drawer_widget.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -21,7 +23,7 @@ class _MapScreenState extends State<MapScreen> {
   static Position? position;
   final Completer<GoogleMapController> _mapController =
       Completer<GoogleMapController>(); //Todo : should be closed
-  final Set<Marker> markers = {}; // passing to cubit
+  late Set<Marker> markers = {}; // passing to cubit
 
   static final CameraPosition currentUserCameraPosition = CameraPosition(
     bearing: 0.0,
@@ -39,7 +41,7 @@ class _MapScreenState extends State<MapScreen> {
   //! mapsScreenBody
   Widget buildMaps() {
     return GoogleMap(
-      markers: markers,
+      markers: newMethod(), // context.of<MapsScreen>.markers
       initialCameraPosition: currentUserCameraPosition,
       mapType: MapType.normal,
       myLocationButtonEnabled: false,
@@ -53,6 +55,24 @@ class _MapScreenState extends State<MapScreen> {
       },
     );
   }
+
+  Set<Marker> newMethod() {
+    log("55555555555555=> ${BlocProvider.of<MapsCubit>(context).markers}");
+    return BlocProvider.of<MapsCubit>(context).markers ?? {};
+  }
+
+  // Widget buildMarkerBloc() {
+  //   return BlocBuilder<MapsCubit, MapsState>(
+  //     bloc: getIt<MapsCubit>(),
+  //     builder: (context, state) {
+  //       if (state is MarkersLoaded) {
+  //         markers = (state).markers;
+  //         log('======================= $markers');
+  //       }
+  //       return Container();
+  //     },
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +91,6 @@ class _MapScreenState extends State<MapScreen> {
                 ),
           CustomFloatingSearchBar(
             mapController: _mapController,
-            markers: markers,
           ),
         ],
       ),
