@@ -9,10 +9,10 @@ source code for Google Maps
 
 ## App Features
 
-- Provide destination Latitude and Longitude.
-- Show markers for source and destination locations.
-- Draw polyline for the closest path between source and destination.
-- Navigate destination to google map app and use route direction.
+- 📍 Provide destination Latitude and Longitude.
+- 📌 Show markers for source and destination locations.
+- 🛣️ Draw polyline for the closest path between source and destination.
+- 🧭 Navigate destination to Google Maps app and use route direction.
 
 
 ## API Reference
